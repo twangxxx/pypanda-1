@@ -30,6 +30,7 @@ class Panda(object):
                 print('Unique TFs:', self.num_tfs)
         else:
             self.motif_data = None
+            self.num_tfs    = 0
 
         if expression_file:
             with Timer('Loading expression data ...'):
@@ -69,6 +70,7 @@ class Panda(object):
         if self.motif_data is None:
             print('Returning the correlation matrix of expression data in <Panda_obj>.correlation_matrix')
             #self.panda_network = self.correlation_matrix
+            self.panda_network = self.correlation_matrix
             self.__pearson_results_data_frame()
             return
         # Auxiliary dicts
@@ -327,7 +329,7 @@ class Panda(object):
         plt.savefig(file, dpi=300)
         return None
 
-   def return_panda_indegree(self):
+    def return_panda_indegree(self):
         '''Return Panda indegree.'''
         #subset_indegree = self.export_panda_results.loc[:,['gene','force']]
         export_panda_results_pd = pd.DataFrame(self.export_panda_results,columns=['tf','gene','motif','force'])
